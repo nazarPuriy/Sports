@@ -1,0 +1,183 @@
+### Obtenir equips
+GET http://localhost:5000/teams/
+Accept: application/json
+### Obtenir partits
+GET http://localhost:5000/matches/
+Accept: application/json
+### Obtenir competicions
+GET http://localhost:5000/competitions/
+Accept: application/json
+### Obtenir usuaris
+GET http://localhost:5000/accounts/
+Accept: application/json
+### Obtenir ordres
+GET http://localhost:5000/orders/
+Accept: application/json
+### Obtenir 1 equip
+GET http://localhost:5000/team/1
+Accept: application/json
+### Obtetir 1 partit
+GET http://localhost:5000/match/8
+Accept: application/json
+### Obtetir 1 competicio
+GET http://localhost:5000/competition/2
+Accept: application/json
+### Afegir un equip
+POST http://localhost:5000/team/
+Content-Type: application/json
+
+{
+  "name": "Espuñatinos de cuerpodeforminus",
+  "country": "Peru"
+}
+### Modificar equip
+PUT http://localhost:5000/team/2
+Content-Type: application/json
+
+{
+  "name": "equipAlfa",
+  "country": "Peru"
+}
+### Eliminar equip
+DELETE http://localhost:5000/team/2
+Accept: application/json
+### Afegir partit
+POST http://localhost:5000/match/
+Authorization: Basic eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InFhIiwiZXhwIjoxNjUzMDc0NDU0fQ.rX9wfoc-0DVd4Hijl1cNswY14qeEOPb7WbAgL7BdZag loquesea
+Content-Type: application/json
+
+{
+  "date": "2022-06-05",
+  "price": 200.0,
+  "local_id": 7,
+  "visitor_id": 9,
+  "total_available_tickets": 100
+}
+### Modificar partit
+PUT http://localhost:5000/match/4/
+Content-Type: application/json
+
+{
+  "total_available_tickets": 2
+}
+### Eliminar partit
+DELETE http://localhost:5000/match/3
+Accept: application/json
+
+### Afegir competicio
+POST http://localhost:5000/competition/
+Content-Type: application/json
+
+{
+  "name": "Juegos del hambre",
+  "category": "Senior",
+  "sport": "Football",
+  "teams": [7,8,9],
+  "matches": [16,17]
+}
+### Modificar competicio
+PUT http://localhost:5000/competition/2
+Content-Type: application/json
+
+{
+  "name": "Prueba2",
+  "category": "Senior",
+  "sport": "Football",
+  "teams": [],
+  "matches": []
+}
+### Eliminar competicio
+DELETE http://localhost:5000/competition/1
+Accept: application/json
+
+
+### Afegir team a competition
+POST http://localhost:5000/competition/1/team/
+Content-Type: application/json
+
+{
+"name": "equip4",
+  "country": "Peru"
+}
+
+### Eliminar team de competition
+DELETE http://localhost:5000/competition/1/team/1
+Accept: application/json
+
+### Afegir un usuari
+POST http://localhost:5000/account/
+Content-Type: application/json
+
+{
+  "username": "trellas"
+}
+
+### Afegir un ordre a un usuari
+POST http://localhost:5000/order/trellas/
+Content-Type: application/json
+
+{
+  "match_id": 1,
+  "tickets_bought": 1
+}
+
+### Treiem l'usuari creat: estava fet sense encritar el password
+DELETE http://localhost:5000/account/trellas/
+
+### Afegim un usuari nou
+POST http://localhost:5000/account/
+Content-Type: application/json
+
+{
+  "username": "ferran",
+  "password": "alanTuring",
+  "available_money": 300
+
+}
+
+### I un altre usuari nou
+POST http://localhost:5000/account/
+Content-Type: application/json
+
+{
+  "username": "qw",
+  "password": "qw",
+  "available_money": 1000
+
+}
+
+### I un admin
+POST http://localhost:5000/account/
+Content-Type: application/json
+
+{
+  "username": "qa",
+  "password": "qa",
+  "available_money": 1000,
+  "is_admin": 1
+}
+
+### Comprovem que s'hagin afegit
+GET http://localhost:5000/accounts/
+
+### Anem a iniciar sessió
+POST http://localhost:5000/login/
+Content-Type: application/json
+
+{
+  "username": "qw",
+  "password": "qw"
+
+}
+
+### Finalment fem una compra, ara autenticant-nos (canviar token pel rebut anteriorment):
+POST http://localhost:5000/order/ferran/
+Authorization: Basic eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InFhIiwiZXhwIjoxNjUzMDc0NDU0fQ.rX9wfoc-0DVd4Hijl1cNswY14qeEOPb7WbAgL7BdZag loquesea
+Content-Type: application/json
+
+{
+  "match_id": 4,
+  "tickets_bought": 1
+
+}
+
